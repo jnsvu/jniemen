@@ -1,11 +1,13 @@
 {
   "name": "jniemen",
+  "homepage": "https://sniib.github.io/jniemen/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "gh-pages -d .next"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -16,6 +18,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.3",
+    "gh-pages": "^3.1.0",
     "typescript": "^4.2.3"
   }
 }
