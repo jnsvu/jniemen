@@ -6,7 +6,6 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core"
-import { GitHub, LinkedIn } from "@material-ui/icons"
 
 const useStyles = makeStyles((theme) => ({
   appBarIcon: {
@@ -26,28 +25,33 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  nameTextContainer: {
+    borderRightStyle: "solid",
+    borderBottomWStyle: "solid",
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    paddingBottom: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
 }))
 
-export function AppBar() {
+export const AppBar = () => {
   const classes = useStyles()
 
   return (
-    <MaterialAppBar className={classes.appBar} position="static" color="transparent" elevation={0}>
+    <MaterialAppBar
+      className={classes.appBar}
+      position="sticky"
+      color="transparent"
+      elevation={0}
+    >
       <Toolbar className={classes.toolBar}>
-        <Typography variant="h5">JAAKKO NIEMENSIVU</Typography>
-        <Button className={classes.button} color="inherit">
-          Submit a tree
-        </Button>
-        <Button className={classes.button} color="inherit">
-          Statistics
-        </Button>
-        <Button className={classes.button} color="inherit">
-          About
-        </Button>
-        <Box>
-          <GitHub />
-          <LinkedIn />
+        <Box className={classes.nameTextContainer}>
+          <Typography variant="h5">JAAKKO{"\n"}NIEMENSIVU</Typography>
         </Box>
+        <Button className={classes.button} color="inherit">
+          Contact
+        </Button>
       </Toolbar>
     </MaterialAppBar>
   )
