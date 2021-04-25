@@ -1,7 +1,17 @@
-import { makeStyles } from "@material-ui/core"
+import {
+  Box,
+  Container,
+  Divider,
+  makeStyles,
+  Paper,
+  Typography,
+} from "@material-ui/core"
+import { EmailForm } from "../lib/utils/components/EmailForm"
+import { Page } from "../lib/utils/components/Page"
+import { MutableRefObject, useRef } from "react"
+import { Email, School } from "@material-ui/icons"
 import Head from "next/head"
-
-import HomePage from "./home"
+import { ProfileImage } from "../lib/utils/components/ProfileImage"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -9,30 +19,32 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     flex: 1,
     flexGrow: 1,
+    backgroundColor: theme.palette.primary[900],
+    paddingTop: theme.spacing(6),
+  },
+  informationBlock: {
+    width: "25em",
+    backgroundColor: theme.palette.primary[800],
+    padding: theme.spacing(3),
+    margin: theme.spacing(3),
   },
   aboutTextContainer: {
     display: "flex",
     flex: 1,
   },
-  imageContainer: {},
-  image: {
-    position: "fixed",
-    overflow: "hidden",
-    zIndex: -1,
-  },
-  imageOverlay: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: "rgba(0,0,0,.15)",
-    zIndex: -1,
-  },
 }))
 
-export default function IndexPage() {
+const IndexPage = () => {
   const styles = useStyles()
+  const aboutContainerRef = useRef<HTMLDivElement | null>(null)
+  const projectsContainerRef = useRef<HTMLDivElement | null>(null)
+  const contactContainerRef = useRef<HTMLDivElement | null>(null)
+
+  const scrollIntoView = (
+    ref: MutableRefObject<HTMLDivElement | HTMLElement>
+  ) => {
+    ref.current.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
 
   return (
     <>
@@ -43,7 +55,108 @@ export default function IndexPage() {
           content="Next.js + SWR codebase containing realworld examples (CRUD, auth, advanced patterns, etc) that adheres to the realworld spec and API"
         />
       </Head>
-      <HomePage />
+      <Page
+        appBarProps={{
+          onAboutClick: () => scrollIntoView(aboutContainerRef),
+          onProjectsClick: () => scrollIntoView(projectsContainerRef),
+          onContactClick: () => scrollIntoView(contactContainerRef),
+        }}
+      >
+        <ProfileImage
+          onDownArrowPress={() => scrollIntoView(aboutContainerRef)}
+        />
+        <Container
+          ref={aboutContainerRef}
+          className={styles.container}
+          maxWidth={false}
+        >
+          <Typography align="center" variant="h4">
+            About me
+          </Typography>
+          <Box display="flex" flexDirection="column">
+            <Box display="flex" justifyContent="space-evenly" flexWrap="wrap">
+              <Paper
+                variant="outlined"
+                square
+                className={styles.informationBlock}
+              >
+                <Box display="flex" justifyContent="center">
+                  <School fontSize="large" style={{ marginRight: 10 }} />
+                  <Typography variant="h5">Education</Typography>
+                </Box>
+                <ul>
+                  <li>
+                    <Typography>Aalto University</Typography>
+                  </li>
+                  <li>
+                    <Typography>Software {"&"} Service Engineering</Typography>
+                  </li>
+                </ul>
+              </Paper>
+              <Paper
+                variant="outlined"
+                square
+                className={styles.informationBlock}
+              >
+                <Box display="flex" justifyContent="center">
+                  <School fontSize="large" style={{ marginRight: 10 }} />
+                  <Typography variant="h5">Experience</Typography>
+                </Box>
+                <Typography> Software {"&"} Service Engineering</Typography>
+              </Paper>
+              <Paper
+                variant="outlined"
+                square
+                className={styles.informationBlock}
+              >
+                <Box display="flex" justifyContent="center">
+                  <School fontSize="large" style={{ marginRight: 10 }} />
+                  <Typography variant="h5">Freetime</Typography>
+                </Box>
+                <ul>
+                  <li>
+                    <Typography>Gym {"&"} tennis</Typography>
+                  </li>
+                  <li>
+                    <Typography>Software projects</Typography>
+                  </li>
+                </ul>
+              </Paper>
+            </Box>
+          </Box>
+          <Divider />
+        </Container>
+        <Container
+          ref={projectsContainerRef}
+          className={styles.container}
+          maxWidth={false}
+        >
+          <Typography align="center" variant="h4">
+            Projects I have worked on
+          </Typography>
+          <Box textAlign="center" p={12}>
+            <Typography color="textSecondary" variant="subtitle2">
+              To be added soon
+            </Typography>
+          </Box>
+        </Container>
+        <Container ref={contactContainerRef}>
+          <Box
+            my={3}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Email />
+            <Box ml={2}>
+              <Typography variant="h5">Send me mail</Typography>
+            </Box>
+          </Box>
+          <EmailForm />
+        </Container>
+      </Page>
     </>
   )
 }
+
+export default IndexPage

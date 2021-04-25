@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import { TextField, Button, Grid } from "@material-ui/core"
-import { emailPattern } from "../../../lib/utils/validate"
+import { emailPattern } from "../validate"
 
 interface EmailFormProps {}
 
