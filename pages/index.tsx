@@ -84,14 +84,6 @@ const IndexPage = () => {
                   <School fontSize="large" style={{ marginRight: 10 }} />
                   <Typography variant="h5">Education</Typography>
                 </Box>
-                <ul>
-                  <li>
-                    <Typography>Aalto University</Typography>
-                  </li>
-                  <li>
-                    <Typography>Software {"&"} Service Engineering</Typography>
-                  </li>
-                </ul>
               </Paper>
               <Paper
                 variant="outlined"
@@ -102,7 +94,6 @@ const IndexPage = () => {
                   <School fontSize="large" style={{ marginRight: 10 }} />
                   <Typography variant="h5">Experience</Typography>
                 </Box>
-                <Typography> Software {"&"} Service Engineering</Typography>
               </Paper>
               <Paper
                 variant="outlined"
@@ -113,14 +104,6 @@ const IndexPage = () => {
                   <School fontSize="large" style={{ marginRight: 10 }} />
                   <Typography variant="h5">Freetime</Typography>
                 </Box>
-                <ul>
-                  <li>
-                    <Typography>Gym {"&"} tennis</Typography>
-                  </li>
-                  <li>
-                    <Typography>Software projects</Typography>
-                  </li>
-                </ul>
               </Paper>
             </Box>
           </Box>
