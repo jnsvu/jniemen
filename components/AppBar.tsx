@@ -24,34 +24,43 @@ const useStyles = makeStyles((theme) => ({
   toolBar: {
     display: "flex",
     justifyContent: "space-between",
+    color: theme.palette.common.white,
   },
   nameTextContainer: {
-    borderRightStyle: "solid",
-    borderBottomWStyle: "solid",
-    borderBottomWidth: 1,
-    borderRightWidth: 1,
-    paddingBottom: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    backgroundColor: "rgba(0,0,0,0.2)",
+    padding: theme.spacing(2),
+    borderBottomLeftRadius: theme.shape.borderRadius,
+    borderBottomRightRadius: theme.shape.borderRadius,
   },
 }))
 
-export const AppBar = () => {
+interface AooBarProps {}
+
+export const AppBar: React.FC<AooBarProps> = () => {
   const classes = useStyles()
 
   return (
     <MaterialAppBar
       className={classes.appBar}
-      position="sticky"
+      position="fixed"
       color="transparent"
       elevation={0}
     >
       <Toolbar className={classes.toolBar}>
         <Box className={classes.nameTextContainer}>
-          <Typography variant="h5">JAAKKO{"\n"}NIEMENSIVU</Typography>
+          <Typography variant="h5">JAAKKO NIEMENSIVU</Typography>
         </Box>
-        <Button className={classes.button} color="inherit">
-          Contact
-        </Button>
+        <Box>
+          <Button className={classes.button} color="inherit">
+            About
+          </Button>
+          <Button className={classes.button} color="inherit">
+            Projects
+          </Button>
+          <Button className={classes.button} color="inherit">
+            Contact
+          </Button>
+        </Box>
       </Toolbar>
     </MaterialAppBar>
   )

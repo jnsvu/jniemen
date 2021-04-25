@@ -1,34 +1,45 @@
-import { Box, IconButton, makeStyles } from "@material-ui/core"
+import { Box, Collapse, IconButton, makeStyles } from "@material-ui/core"
 import { GitHub, LinkedIn } from "@material-ui/icons"
-import { AppBar } from "./AppBar"
 
 export interface SocialMediasProps {}
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    position: "sticky",
+  root: {
+    position: "fixed",
+    top: "10%",
+    right: 0,
+    zIndex: theme.zIndex.appBar,
+  },
+  iconContainer: {
     display: "flex",
     flexDirection: "column",
-    float: "right",
-    top: "30%",
+    pointerEvents: "auto",
   },
   icon: {
-    margin: theme.spacing(0.5),
-    fontSize: 40,
+    margin: theme.spacing(0.25),
+    fontSize: 30,
+    color: theme.palette.common.white,
   },
 }))
 
 export const SocialMedias: React.FC<SocialMediasProps> = (props) => {
-  const classes = useStyles()
+  const styles = useStyles()
 
   return (
-    <Box className={classes.container}>
-      <IconButton>
-        <LinkedIn className={classes.icon} />
-      </IconButton>
-      <IconButton>
-        <GitHub className={classes.icon} />
-      </IconButton>
+    <Box className={styles.root}>
+      <Collapse in mountOnEnter>
+        <Box className={styles.iconContainer}>
+          <IconButton
+            href={"https://www.linkedin.com/in/jaakko-niemensivu-213b10154/"}
+            target="_blank"
+          >
+            <LinkedIn className={styles.icon} />
+          </IconButton>
+          <IconButton href={"https://github.com/sniib/"} target="_blank">
+            <GitHub className={styles.icon} />
+          </IconButton>
+        </Box>
+      </Collapse>
     </Box>
   )
 }

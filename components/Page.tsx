@@ -1,5 +1,5 @@
-import { Container } from "@material-ui/core"
 import { AppBar } from "./AppBar"
+import { Footer } from "./Footer"
 import { SocialMedias } from "./SocialMedias"
 
 export interface PageProps {}
@@ -8,10 +8,11 @@ export const Page: React.FC<PageProps> = (props) => {
   const { children } = props
 
   return (
-    <Container maxWidth={false} disableGutters>
+    <div>
       <AppBar />
       <SocialMedias />
       {children}
-    </Container>
+      <Footer />
+    </div>
   )
 }
