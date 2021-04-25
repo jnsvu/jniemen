@@ -1,5 +1,6 @@
 import {
-  AppBar as MaterialAppBar,
+  AppBar as MuiAppBar,
+  AppBarProps as MuiAppBarProps,
   Box,
   Button,
   makeStyles,
@@ -34,13 +35,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface AooBarProps {}
+export interface AooBarProps extends MuiAppBarProps {
+  onAboutClick(): void
+  onProjectsClick(): void
+  onContactClick(): void
+}
 
-export const AppBar: React.FC<AooBarProps> = () => {
+export const AppBar: React.FC<AooBarProps> = ({
+  onAboutClick,
+  onProjectsClick,
+  onContactClick,
+}) => {
   const classes = useStyles()
 
   return (
-    <MaterialAppBar
+    <MuiAppBar
       className={classes.appBar}
       position="fixed"
       color="transparent"
@@ -51,17 +60,29 @@ export const AppBar: React.FC<AooBarProps> = () => {
           <Typography variant="h5">JAAKKO NIEMENSIVU</Typography>
         </Box>
         <Box>
-          <Button className={classes.button} color="inherit">
+          <Button
+            onClick={onAboutClick}
+            className={classes.button}
+            color="inherit"
+          >
             About
           </Button>
-          <Button className={classes.button} color="inherit">
+          <Button
+            onClick={onProjectsClick}
+            className={classes.button}
+            color="inherit"
+          >
             Projects
           </Button>
-          <Button className={classes.button} color="inherit">
+          <Button
+            onClick={onContactClick}
+            className={classes.button}
+            color="inherit"
+          >
             Contact
           </Button>
         </Box>
       </Toolbar>
-    </MaterialAppBar>
+    </MuiAppBar>
   )
 }

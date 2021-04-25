@@ -9,7 +9,7 @@ import {
 import { EmailForm } from "./components/EmailForm"
 import { Page } from "../../components/Page"
 import { ProfileImage } from "./components/ProfileImage"
-import { useRef } from "react"
+import { MutableRefObject, useRef } from "react"
 import { Email, School } from "@material-ui/icons"
 import Image from "next/image"
 
@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     flex: 1,
     flexGrow: 1,
-    backgroundColor: theme.palette.primary[700],
+    backgroundColor: theme.palette.primary[900],
     paddingTop: theme.spacing(6),
   },
   informationBlock: {
     width: "25em",
-    backgroundColor: theme.palette.primary[600],
+    backgroundColor: theme.palette.primary[800],
     padding: theme.spacing(3),
     margin: theme.spacing(3),
   },
@@ -38,21 +38,31 @@ const useStyles = makeStyles((theme) => ({
 
 interface HomePageProps {}
 
-const HomePage: React.FC<HomePageProps> = (props) => {
+const HomePage: React.FC<HomePageProps> = () => {
   const styles = useStyles()
-  const informationContainerRef = useRef<HTMLDivElement | null>(null)
+  const aboutContainerRef = useRef<HTMLDivElement | null>(null)
+  const projectsContainerRef = useRef<HTMLDivElement | null>(null)
+  const contactContainerRef = useRef<HTMLDivElement | null>(null)
 
-  const scrollIntoInformationView = () =>
-    informationContainerRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    })
+  const scrollIntoView = (
+    ref: MutableRefObject<HTMLDivElement | HTMLElement>
+  ) => {
+    ref.current.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
 
   return (
-    <Page>
-      <ProfileImage onDownArrowPress={scrollIntoInformationView} />
+    <Page
+      appBarProps={{
+        onAboutClick: () => scrollIntoView(aboutContainerRef),
+        onProjectsClick: () => scrollIntoView(projectsContainerRef),
+        onContactClick: () => scrollIntoView(contactContainerRef),
+      }}
+    >
+      <ProfileImage
+        onDownArrowPress={() => scrollIntoView(aboutContainerRef)}
+      />
       <Container
-        ref={informationContainerRef}
+        ref={aboutContainerRef}
         className={styles.container}
         maxWidth={false}
       >
@@ -110,24 +120,23 @@ const HomePage: React.FC<HomePageProps> = (props) => {
             </Paper>
           </Box>
         </Box>
-        <Box my={4} mx={10} >
-          <Divider />
-        </Box>
+        <Divider />
+      </Container>
+      <Container
+        ref={projectsContainerRef}
+        className={styles.container}
+        maxWidth={false}
+      >
         <Typography align="center" variant="h4">
           Projects I have worked on
         </Typography>
-        <Box className={styles.homeServImageContainer}>
-          <Image
-            src="/../public/img/homeserv_app.png"
-            width={300}
-            height={600}
-            objectFit="contain"
-            quality={100}
-            className={styles.homeServImage}
-          />
+        <Box textAlign="center" p={12}>
+          <Typography color="textSecondary" variant="subtitle2">
+            To be added soon
+          </Typography>
         </Box>
       </Container>
-      <Container>
+      <Container ref={contactContainerRef}>
         <Box my={3} display="flex" alignItems="center" justifyContent="center">
           <Email />
           <Box ml={2}>

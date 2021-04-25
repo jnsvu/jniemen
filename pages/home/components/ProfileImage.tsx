@@ -1,6 +1,7 @@
 import { makeStyles, Box, IconButton, Typography } from "@material-ui/core"
 import Image from "next/image"
 import { ArrowDownward } from "@material-ui/icons"
+import Typist from "react-typist"
 
 const useStyles = makeStyles((theme) => ({
   imageContainer: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontFamily: "Monospace",
-    lineHeight: 2
+    marginBottom: theme.spacing(6),
   },
 }))
 
@@ -59,9 +60,14 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
       />
       <Box className={styles.imageOverlay} />
       <Box mt="auto" mx="auto" textAlign="center">
-        <Typography className={styles.header} variant="h2">
-          Full-stack mobile {"&"} web dev
-        </Typography>
+        <Typist avgTypingDelay={75} startDelay={750} cursor={{ show: false }}>
+          <Typography className={styles.header} variant="h2">
+            {"<"}Full-stack mobile {"&"} web dev{">"}
+            <Typist.Backspace count={1} delay={1000} />
+            <Typist.Delay ms={500} />
+            {"/>"}
+          </Typography>
+        </Typist>
         <IconButton
           className={styles.arrowIconButton}
           onClick={onDownArrowPress}

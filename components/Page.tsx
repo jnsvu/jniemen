@@ -1,15 +1,17 @@
-import { AppBar } from "./AppBar"
+import { AppBar, AooBarProps } from "./AppBar"
 import { Footer } from "./Footer"
 import { SocialMedias } from "./SocialMedias"
 
-export interface PageProps {}
+export interface PageProps {
+  appBarProps?: AooBarProps
+}
 
 export const Page: React.FC<PageProps> = (props) => {
-  const { children } = props
+  const { appBarProps, children } = props
 
   return (
     <div>
-      <AppBar />
+      <AppBar {...appBarProps} />
       <SocialMedias />
       {children}
       <Footer />

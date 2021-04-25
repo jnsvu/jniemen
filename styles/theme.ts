@@ -1,16 +1,20 @@
-import { createMuiTheme, PaletteColorOptions } from "@material-ui/core/styles"
+import {
+  createMuiTheme,
+  PaletteColorOptions,
+  responsiveFontSizes,
+} from "@material-ui/core/styles"
 
 const darkPrimary: PaletteColorOptions = {
-  50: "#0057a8",
-  100: "#004e97",
-  200: "#004686",
-  300: "#003d76",
-  400: "#003465",
-  500: "#002c54",
-  600: "#002343",
-  700: "#001a32",
-  800: "#001122",
-  900: "#000911",
+  50: "#3379b9",
+  100: "#1a68b1",
+  200: "#0057a8",
+  300: "#004e97",
+  400: "#004686",
+  500: "#003d76",
+  600: "#003465",
+  700: "#002c54",
+  800: "#002343",
+  900: "#001a32",
 }
 
 const lightPrimary = {
@@ -26,7 +30,7 @@ const lightPrimary = {
   900: "#e9eaec",
 }
 
-export const theme = createMuiTheme({
+const theme = createMuiTheme({
   palette: {
     type: "dark",
     primary: darkPrimary,
@@ -34,8 +38,8 @@ export const theme = createMuiTheme({
       main: "#242c37",
     },
     background: {
-      default: darkPrimary[900],
-      paper: darkPrimary[700],
+      default: "#000911",
+      paper: "#bdc1c5",
     },
   },
   typography: {
@@ -49,6 +53,8 @@ export const theme = createMuiTheme({
     },
   },
 })
+const responsiveTheme = responsiveFontSizes(theme)
+export { responsiveTheme as theme }
 
 /*
   primary?: PaletteColorOptions;

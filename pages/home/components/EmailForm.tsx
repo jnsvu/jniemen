@@ -1,125 +1,85 @@
-import { useForm, Controller } from "react-hook-form"
-import { TextField, Button, makeStyles, Grid } from "@material-ui/core"
+import { useForm } from "react-hook-form"
+import { TextField, Button, Grid } from "@material-ui/core"
+import { emailPattern } from "../../../lib/utils/validate"
 
-const useStyles = makeStyles(() => ({
-  container: {
-    display: "flex",
-  },
-}))
-
-export interface EmailFormProps {}
+interface EmailFormProps {}
 
 interface EmailFormFields {
   name: string
   email: string
-  topic?: string
+  topic: string
   message: string
 }
 
-export const EmailForm: React.FC<EmailFormProps> = (props) => {
-  const { handleSubmit, control, reset } = useForm<EmailFormFields>()
-
-  const styles = useStyles()
-
-  const onSubmit = (data) => console.log(data)
+export const EmailForm: React.FC<EmailFormProps> = () => {
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm<EmailFormFields>()
+  const onSubmit = (data: EmailFormFields) => console.log(data)
+  console.log(errors)
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} onReset={() => reset()}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Controller
-            defaultValue=""
+          <TextField
+            {...register("name", { maxLength: 50 })}
+            fullWidth
+            error={!!errors.name}
+            helperText={errors.name?.message}
+            required
             name="name"
-            render={({ field }) => (
-              <TextField
-                required
-                fullWidth
-                id="name"
-                label="Name"
-                variant="outlined"
-              />
-            )}
-            control={control}
-            rules={{
-              required: "Required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "invalid email address",
-              },
-            }}
+            label="Name"
+            variant="outlined"
           />
         </Grid>
         <Grid item xs={12}>
-          <Controller
+          <TextField
+            {...register("email", {
+              maxLength: 50,
+              pattern: {
+                value: emailPattern,
+                message: "Invalid email",
+              },
+            })}
+            fullWidth
+            required
+            error={!!errors.email}
+            helperText={errors.email?.message}
             name="email"
-            render={({ field }) => (
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                variant="outlined"
-              />
-            )}
-            control={control}
-            defaultValue=""
-            rules={{
-              required: "Required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "invalid email address",
-              },
-            }}
+            label="Email"
+            variant="outlined"
           />
         </Grid>
         <Grid item xs={12}>
-          <Controller
+          <TextField
+            {...register("topic", { maxLength: 50 })}
+            fullWidth
+            required
+            error={!!errors.topic}
+            helperText={errors.topic?.message}
             name="topic"
-            render={({ field }) => (
-              <TextField
-                fullWidth
-                id="topic"
-                label="Topic"
-                variant="outlined"
-              />
-            )}
-            control={control}
-            defaultValue=""
-            rules={{
-              required: "Required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "invalid email address",
-              },
-            }}
+            label="Topic"
+            variant="outlined"
           />
         </Grid>
         <Grid item xs={12}>
-          <Controller
-            name="topic"
-            render={({ field }) => (
-              <TextField
-                fullWidth
-                multiline
-                rows={5}
-                id="message"
-                label="Message..."
-                variant="outlined"
-              />
-            )}
-            control={control}
-            defaultValue=""
-            rules={{
-              required: "Required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "invalid email address",
-              },
-            }}
+          <TextField
+            {...register("message", { maxLength: 400 })}
+            fullWidth
+            required
+            error={!!errors.message}
+            helperText={errors.message?.message}
+            name="message"
+            label="Message"
+            variant="outlined"
           />
         </Grid>
         <Grid item xs={6}>
-          <Button size="large" variant="text">
+          <Button size="large" variant="text" type="reset">
             Clear
           </Button>
         </Grid>
