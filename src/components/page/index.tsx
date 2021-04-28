@@ -3,7 +3,7 @@ import { Footer } from "./Footer"
 import { SocialMedias } from "./SocialMedias"
 
 export interface PageProps {
-  appBarProps?: AooBarProps
+  appBarProps: AooBarProps
 }
 
 export const Page: React.FC<PageProps> = (props) => {

@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 })
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { senderMail, name, message } = req.body
+  const { topic, senderMail, name, message } = req.body
 
   if (!senderMail || !name || !message) {
     return res.status(403).send("Invalid request")
@@ -20,27 +20,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const mail = {
     from: senderMail,
     to: process.env.EMAIL_USERNAME,
-    subject: `Message from ${name} <${senderMail}>`,
+    subject: `${topic || "New message from"} ${name} <${senderMail}>`,
     text: message,
   }
 
   await transporter.sendMail(mail)
-}
 
-const mailer = ({ senderMail, name, text, recipientMail }) => {
-  const from =
-    name && senderMail ? `${name} <${senderMail}>` : `${name || senderMail}`
-  const message = {
-    from: senderMail,
-    to: recipientMail,
-    subject: `New message from ${from}`,
-    text,
-    replyTo: from,
-  }
-
-  return new Promise((resolve, reject) => {
-    transporter.sendMail(message, (error, info) =>
-      error ? reject(error) : resolve(info)
-    )
-  })
+  return res.json({ message: "Email sent" })
 }

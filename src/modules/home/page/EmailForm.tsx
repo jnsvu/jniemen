@@ -2,8 +2,6 @@ import { useForm } from "react-hook-form"
 import { TextField, Button, Grid } from "@material-ui/core"
 import { emailPattern } from "../../../utils/validate"
 
-interface EmailFormProps {}
-
 interface EmailFormFields {
   name: string
   email: string
@@ -11,18 +9,22 @@ interface EmailFormFields {
   message: string
 }
 
-export const EmailForm: React.FC<EmailFormProps> = () => {
+interface EmailFormProps {
+  onSubmit(data: EmailFormFields): void
+}
+
+export const EmailForm: React.FC<EmailFormProps> = ({ onSubmit }) => {
   const {
     handleSubmit,
     register,
     reset,
     formState: { errors },
   } = useForm<EmailFormFields>()
-  const onSubmit = (data: EmailFormFields) => console.log(data)
-  console.log(errors)
+
+  const _onSubmit = (data: EmailFormFields) => onSubmit(data)
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} onReset={() => reset()}>
+    <form onSubmit={handleSubmit(_onSubmit)} onReset={() => reset()}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
@@ -76,6 +78,8 @@ export const EmailForm: React.FC<EmailFormProps> = () => {
             name="message"
             label="Message"
             variant="outlined"
+            multiline
+            rows={4}
           />
         </Grid>
         <Grid item xs={6}>

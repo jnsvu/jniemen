@@ -1,1 +1,2 @@
-export * from "./Page"
+export * from "./page"
+export * from "./Alert"

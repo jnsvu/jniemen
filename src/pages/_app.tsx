@@ -1,14 +1,25 @@
 import "../styles/globals.css"
-import { CssBaseline, MuiThemeProvider } from "@material-ui/core"
+import { CssBaseline, ThemeProvider } from "@material-ui/core"
 import { theme } from "../styles/theme"
+import { QueryClientProvider, QueryClient } from "react-query"
+import { NextPage } from "next"
 
-function MyApp({ Component, pageProps }) {
+const queryClient = new QueryClient()
+
+interface AppProps {
+  Component: React.ElementType
+  pageProps: NextPage
+}
+
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </MuiThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </QueryClientProvider>
   )
 }
 
-export default MyApp
+export default App
