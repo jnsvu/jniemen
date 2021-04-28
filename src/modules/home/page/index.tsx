@@ -6,12 +6,13 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core"
-import { EmailForm } from "../lib/utils/components/EmailForm"
-import { Page } from "../lib/utils/components/Page"
+import { EmailForm } from "./EmailForm"
+import { ProfileImage } from "./ProfileImage"
+import { Page } from "../../../components/Page"
 import { MutableRefObject, useRef } from "react"
 import { Email, School } from "@material-ui/icons"
 import Head from "next/head"
-import { ProfileImage } from "../lib/utils/components/ProfileImage"
+import { NextPage } from "next"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const IndexPage = () => {
+export const HomePage: NextPage = () => {
   const styles = useStyles()
   const aboutContainerRef = useRef<HTMLDivElement | null>(null)
   const projectsContainerRef = useRef<HTMLDivElement | null>(null)
@@ -50,10 +51,7 @@ const IndexPage = () => {
     <>
       <Head>
         <title>JN</title>
-        <meta
-          name="description"
-          content="Next.js + SWR codebase containing realworld examples (CRUD, auth, advanced patterns, etc) that adheres to the realworld spec and API"
-        />
+        <meta name="description" content="orld spec and API" />
       </Head>
       <Page
         appBarProps={{
@@ -141,5 +139,3 @@ const IndexPage = () => {
     </>
   )
 }
-
-export default IndexPage

@@ -50,7 +50,7 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
   return (
     <Box className={styles.imageContainer}>
       <Image
-        src="/../public/img/profile.jpeg"
+        src="/img/profile.jpeg"
         alt="Picture of the author"
         layout="fill"
         objectFit="cover"
