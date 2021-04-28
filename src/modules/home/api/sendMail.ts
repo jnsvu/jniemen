@@ -6,7 +6,7 @@ interface SendMailParams {
 }
 
 export const sendMail = (params: SendMailParams) => {
-  return fetch("http://localhost:3000/api/contact", {
+  return fetch(process.env.API_URL + "/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(params),
