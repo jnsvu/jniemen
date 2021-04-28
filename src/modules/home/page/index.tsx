@@ -47,7 +47,8 @@ export const HomePage: NextPage = () => {
   const [showFormAlert, setFormAlertVisible] = useState(false)
   const { mutate, isLoading } = useMutation(sendMail, {
     onSuccess: (data) => {
-      console.log(data)
+      
+      
     },
     onError: (e) => {
       setFormAlertVisible(true)

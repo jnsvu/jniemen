@@ -21,7 +21,10 @@ export const EmailForm: React.FC<EmailFormProps> = ({ onSubmit }) => {
     formState: { errors },
   } = useForm<EmailFormFields>()
 
-  const _onSubmit = (data: EmailFormFields) => onSubmit(data)
+  const _onSubmit = (data: EmailFormFields) => {
+    onSubmit(data)
+    reset()
+  }
 
   return (
     <form onSubmit={handleSubmit(_onSubmit)} onReset={() => reset()}>
