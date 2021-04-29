@@ -39,7 +39,7 @@ const theme = createMuiTheme({
     },
     background: {
       default: "#000911",
-      paper: "#bdc1c5",
+      paper: "#000f1c",
     },
   },
   typography: {
@@ -51,6 +51,9 @@ const theme = createMuiTheme({
         color: "#fff",
       },
     },
+    MuiDrawer: {
+      
+    }
   },
 })
 const responsiveTheme = responsiveFontSizes(theme)

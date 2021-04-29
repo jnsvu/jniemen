@@ -6,7 +6,7 @@ export interface SocialMediasProps {}
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
-    top: "10%",
+    top: "20%",
     right: 0,
     zIndex: theme.zIndex.appBar,
   },
@@ -22,22 +22,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export const SocialMedias: React.FC<SocialMediasProps> = (props) => {
+export const SocialMediaIcons: React.FC = () => {
+  const styles = useStyles()
+
+  return (
+    <>
+      <IconButton
+        href={"https://www.linkedin.com/in/jaakko-niemensivu-213b10154/"}
+        target="_blank"
+      >
+        <LinkedIn className={styles.icon} />
+      </IconButton>
+      <IconButton href={"https://github.com/sniib/"} target="_blank">
+        <GitHub className={styles.icon} />
+      </IconButton>
+    </>
+  )
+}
+
+export const SocialMedias: React.FC<SocialMediasProps> = () => {
   const styles = useStyles()
 
   return (
     <Box className={styles.root}>
       <Collapse in mountOnEnter>
         <Box className={styles.iconContainer}>
-          <IconButton
-            href={"https://www.linkedin.com/in/jaakko-niemensivu-213b10154/"}
-            target="_blank"
-          >
-            <LinkedIn className={styles.icon} />
-          </IconButton>
-          <IconButton href={"https://github.com/sniib/"} target="_blank">
-            <GitHub className={styles.icon} />
-          </IconButton>
+          <SocialMediaIcons />
         </Box>
       </Collapse>
     </Box>

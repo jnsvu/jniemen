@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { TextField, Button, Grid } from "@material-ui/core"
+import { TextField, Button, Grid, Paper } from "@material-ui/core"
 import { emailPattern } from "../../../utils/validate"
 
 interface EmailFormFields {
