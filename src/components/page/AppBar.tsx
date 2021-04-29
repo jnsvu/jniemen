@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@material-ui/core"
 import { Menu } from "@material-ui/icons"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { SocialMediaIcons } from "./SocialMedias"
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +52,7 @@ export const AppBar: React.FC<AooBarProps> = ({
 }) => {
   const classes = useStyles()
   const [showDrawer, setDrawerOpen] = useState(false)
+  const drawerItemClickHandler = useRef<NodeJS.Timeout>()
 
   const menuItems = [
     { title: "About", onClick: onAboutClick },
@@ -62,6 +63,13 @@ export const AppBar: React.FC<AooBarProps> = ({
   useEffect(() => {
     setDrawerOpen(false)
   }, [isSmallScreen])
+
+  useEffect(() => {
+    return (
+      drawerItemClickHandler.current &&
+      clearTimeout(drawerItemClickHandler.current)
+    )
+  }, [])
 
   return (
     <>
@@ -94,17 +102,19 @@ export const AppBar: React.FC<AooBarProps> = ({
       </MuiAppBar>
       <Drawer
         variant="temporary"
-        anchor="right"
+        anchor="bottom"
         open={showDrawer}
         onClose={() => setDrawerOpen(false)}
-        PaperProps={{ style: { width: 200 } }}
       >
         <List onClick={() => setDrawerOpen(false)}>
           {menuItems.map((item, i) => (
             <ListItem
-              onClick={() => item.onClick()}
+              onClick={() => {
+                drawerItemClickHandler.current = setTimeout(item.onClick, 300)
+              }}
               button
               key={"small-app-bar-menu-button-" + i}
+              style={{ textAlign: "center" }}
             >
               <ListItemText primary={item.title} />
             </ListItem>

@@ -46,10 +46,7 @@ export const HomePage: NextPage = () => {
   const contactContainerRef = useRef<HTMLDivElement | null>(null)
   const [showFormAlert, setFormAlertVisible] = useState(false)
   const { mutate, isLoading } = useMutation(sendMail, {
-    onSuccess: (data) => {
-      
-      
-    },
+    onSuccess: (data) => {},
     onError: (e) => {
       setFormAlertVisible(true)
     },
