@@ -1,3 +1,5 @@
+import { useMutation, UseMutationOptions } from "react-query"
+
 interface SendMailParams {
   senderMail: string
   name: string
@@ -5,7 +7,7 @@ interface SendMailParams {
   topic: string
 }
 
-export const sendMail = (params: SendMailParams) => {
+export const sendMail = async (params: SendMailParams) => {
   return fetch("/api/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

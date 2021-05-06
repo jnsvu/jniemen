@@ -51,11 +51,9 @@ const theme = createMuiTheme({
         color: "#fff",
       },
     },
-    MuiDrawer: {
-      
-    }
   },
 })
+
 const responsiveTheme = responsiveFontSizes(theme)
 export { responsiveTheme as theme }
 

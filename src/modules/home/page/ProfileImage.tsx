@@ -2,12 +2,12 @@ import { makeStyles, Box, IconButton, Typography } from "@material-ui/core"
 import Image from "next/image"
 import { ArrowDownward } from "@material-ui/icons"
 import Typist from "react-typist"
+import Div100vh from "react-div-100vh"
 
 const useStyles = makeStyles((theme) => ({
   imageContainer: {
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
   },
   image: {
     position: "fixed",
@@ -48,7 +48,7 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
   const styles = useStyles()
 
   return (
-    <Box className={styles.imageContainer}>
+    <Div100vh className={styles.imageContainer}>
       <Image
         src="/img/profile.jpeg"
         alt="Picture of the author"
@@ -75,6 +75,6 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
           <ArrowDownward className={styles.arrowIcon} />
         </IconButton>
       </Box>
-    </Box>
+    </Div100vh>
   )
 }

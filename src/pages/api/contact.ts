@@ -1,6 +1,10 @@
 import nodemailer from "nodemailer"
 import type { NextApiRequest, NextApiResponse } from "next"
 
+export interface Contact {
+  message: string
+}
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -10,11 +14,11 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse<Contact>) => {
   const { topic, senderMail, name, message } = req.body
 
   if (!senderMail || !name || !message) {
-    return res.status(403).send("Invalid request")
+    return res.status(403).json({ message: "Invalid request" })
   }
 
   const mail = {
