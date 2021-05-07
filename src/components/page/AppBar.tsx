@@ -11,6 +11,8 @@ import {
   makeStyles,
   Toolbar,
   Typography,
+  useScrollTrigger,
+  Slide,
 } from "@material-ui/core"
 import { Menu } from "@material-ui/icons"
 import { useEffect, useRef, useState } from "react"
@@ -44,15 +46,11 @@ export interface AooBarProps extends MuiAppBarProps {
   isSmallScreen: boolean
 }
 
-export const AppBar: React.FC<AooBarProps> = ({
-  onAboutClick,
-  onProjectsClick,
-  onContactClick,
-  isSmallScreen,
-}) => {
+export const AppBar: React.FC<AooBarProps> = ({ onAboutClick, onProjectsClick, onContactClick, isSmallScreen }) => {
   const classes = useStyles()
   const [showDrawer, setDrawerOpen] = useState(false)
   const drawerItemClickHandler = useRef<NodeJS.Timeout>()
+  const trigger = useScrollTrigger()
 
   const menuItems = [
     { title: "About", onClick: onAboutClick },
@@ -65,47 +63,41 @@ export const AppBar: React.FC<AooBarProps> = ({
   }, [isSmallScreen])
 
   useEffect(() => {
-    return (
-      drawerItemClickHandler.current &&
-      clearTimeout(drawerItemClickHandler.current)
-    )
+    return drawerItemClickHandler.current && clearTimeout(drawerItemClickHandler.current)
   }, [])
 
   return (
     <>
-      <MuiAppBar position="fixed" color="transparent" elevation={0}>
-        <Toolbar className={classes.toolBar}>
-          <Box className={classes.nameTextContainer}>
-            <Typography variant="h5">JAAKKO NIEMENSIVU</Typography>
-          </Box>
-          <Box>
-            {isSmallScreen ? (
-              <IconButton onClick={() => setDrawerOpen(true)}>
-                <Menu />
-              </IconButton>
-            ) : (
-              <>
-                {menuItems.map((item, i) => (
-                  <Button
-                    key={"app-bar-menu-button-" + i}
-                    onClick={item.onClick}
-                    className={classes.button}
-                    color="inherit"
-                  >
-                    {item.title}
-                  </Button>
-                ))}
-              </>
-            )}
-          </Box>
-        </Toolbar>
-      </MuiAppBar>
-      <Drawer
-        variant="temporary"
-        anchor="bottom"
-        open={showDrawer}
-        onClose={() => setDrawerOpen(false)}
-      >
+      <Slide appear={false} direction="down" in={!trigger}>
+        <MuiAppBar position="fixed" color="transparent" elevation={0}>
+          <Toolbar className={classes.toolBar}>
+            <Box className={classes.nameTextContainer}>
+              <Typography variant="h5">JAAKKO NIEMENSIVU</Typography>
+            </Box>
+            <Box>
+              {isSmallScreen ? (
+                <IconButton onClick={() => setDrawerOpen(true)}>
+                  <Menu />
+                </IconButton>
+              ) : (
+                <>
+                  {menuItems.map((item, i) => (
+                    <Button
+                      key={"app-bar-menu-button-" + i}
+                      onClick={item.onClick}
+                      className={classes.button}
+                      color="inherit"
+                    >
+                      {item.title}
+                    </Button>
+                  ))}
+                </>
+              )}
+            </Box>
+          </Toolbar>
+        </MuiAppBar>
+      </Slide>
+      <Drawer variant="temporary" anchor="bottom" open={showDrawer} onClose={() => setDrawerOpen(false)}>
         <List onClick={() => setDrawerOpen(false)}>
           {menuItems.map((item, i) => (
             <ListItem

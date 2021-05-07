@@ -1,8 +1,4 @@
-import {
-  createMuiTheme,
-  PaletteColorOptions,
-  responsiveFontSizes,
-} from "@material-ui/core/styles"
+import { createMuiTheme, PaletteColorOptions, responsiveFontSizes } from "@material-ui/core/styles"
 
 const darkPrimary: PaletteColorOptions = {
   50: "#3379b9",

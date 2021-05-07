@@ -42,9 +42,7 @@ export interface ProfileImageProps {
   onDownArrowPress(): void
 }
 
-export const ProfileImage: React.FC<ProfileImageProps> = ({
-  onDownArrowPress,
-}) => {
+export const ProfileImage: React.FC<ProfileImageProps> = ({ onDownArrowPress }) => {
   const styles = useStyles()
 
   return (
@@ -68,10 +66,7 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
             {"/>"}
           </Typography>
         </Typist>
-        <IconButton
-          className={styles.arrowIconButton}
-          onClick={onDownArrowPress}
-        >
+        <IconButton className={styles.arrowIconButton} onClick={onDownArrowPress}>
           <ArrowDownward className={styles.arrowIcon} />
         </IconButton>
       </Box>

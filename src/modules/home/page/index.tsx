@@ -30,16 +30,14 @@ export const HomePage: NextPage = () => {
   const projectsContainerRef = useRef<HTMLDivElement | null>(null)
   const contactContainerRef = useRef<HTMLDivElement | null>(null)
 
-  const scrollIntoView = (
-    ref: MutableRefObject<HTMLDivElement | HTMLElement | null>
-  ) => {
+  const scrollIntoView = (ref: MutableRefObject<HTMLDivElement | HTMLElement | null>) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 
   return (
     <>
       <Head>
-        <title>JN</title>
+        <title>jaakkons</title>
         <meta name="description" content="orld spec and API" />
       </Head>
       <Page
@@ -49,14 +47,8 @@ export const HomePage: NextPage = () => {
           onContactClick: () => scrollIntoView(contactContainerRef),
         }}
       >
-        <ProfileImage
-          onDownArrowPress={() => scrollIntoView(aboutContainerRef)}
-        />
-        <Container
-          ref={aboutContainerRef}
-          className={styles.container}
-          maxWidth={false}
-        >
+        <ProfileImage onDownArrowPress={() => scrollIntoView(aboutContainerRef)} />
+        <Container ref={aboutContainerRef} className={styles.container} maxWidth={false}>
           <Typography align="center" variant="h4">
             About me
           </Typography>
@@ -71,33 +63,25 @@ export const HomePage: NextPage = () => {
                   "Minor in Security & Cloud Computing",
                   "Computer Science BSc. 2016-2019",
                 ]}
+                fadeTime={1500}
               />
               <AboutMeCard
                 title="Experience"
-                items={[
-                  "4+ years of mobile & web development",
-                  "3+ years as a member of a agile team",
-                ]}
+                items={["4+ years of mobile & web development", "3+ years as a member of a agile team"]}
                 Icon={Star}
+                fadeTime={3000}
               />
               <AboutMeCard
                 title="Free time"
-                items={[
-                  "Gym, tennis & other sports",
-                  "Programming projects",
-                  "🍺",
-                ]}
+                items={["Gym, tennis & other sports", "Programming projects", "🍺"]}
                 Icon={SportsTennis}
+                fadeTime={4500}
               />
             </Box>
           </Box>
           <Divider />
         </Container>
-        <Container
-          ref={projectsContainerRef}
-          className={styles.container}
-          maxWidth={false}
-        >
+        <Container ref={projectsContainerRef} className={styles.container} maxWidth={false}>
           <Typography align="center" variant="h4">
             Projects I have worked on
           </Typography>
@@ -108,12 +92,7 @@ export const HomePage: NextPage = () => {
           </Box>
         </Container>
         <Container ref={contactContainerRef}>
-          <Box
-            my={3}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
+          <Box my={3} display="flex" alignItems="center" justifyContent="center">
             <Email />
             <Box ml={2}>
               <Typography variant="h5">Send me mail</Typography>

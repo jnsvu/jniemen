@@ -1,10 +1,4 @@
-import {
-  Snackbar,
-  SnackbarProps,
-  Typography,
-  makeStyles,
-  Box,
-} from "@material-ui/core"
+import { Snackbar, SnackbarProps, Typography, makeStyles, Box } from "@material-ui/core"
 import { CheckCircleOutline, ErrorOutline } from "@material-ui/icons"
 import clsx from "clsx"
 
@@ -30,11 +24,7 @@ interface NotificationProps extends SnackbarProps {
 }
 
 const resolveIcon = (v: NotificationProps["variant"]) => {
-  return v === "success"
-    ? CheckCircleOutline
-    : v === "error"
-    ? ErrorOutline
-    : undefined
+  return v === "success" ? CheckCircleOutline : v === "error" ? ErrorOutline : undefined
 }
 
 export const Notification: React.FC<NotificationProps> = (props) => {

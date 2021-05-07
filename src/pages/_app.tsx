@@ -1,4 +1,5 @@
 import "../styles/globals.css"
+import React from "react"
 import { CssBaseline, ThemeProvider } from "@material-ui/core"
 import { theme } from "../styles/theme"
 import { QueryClientProvider, QueryClient } from "react-query"

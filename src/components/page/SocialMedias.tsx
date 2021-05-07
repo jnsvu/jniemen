@@ -27,10 +27,7 @@ export const SocialMediaIcons: React.FC = () => {
 
   return (
     <>
-      <IconButton
-        href={"https://www.linkedin.com/in/jaakko-niemensivu-213b10154/"}
-        target="_blank"
-      >
+      <IconButton href={"https://www.linkedin.com/in/jaakko-niemensivu-213b10154/"} target="_blank">
         <LinkedIn className={styles.icon} />
       </IconButton>
       <IconButton href={"https://github.com/sniib/"} target="_blank">

@@ -1,12 +1,5 @@
 import { useForm } from "react-hook-form"
-import {
-  TextField,
-  Button,
-  Grid,
-  CircularProgress,
-  makeStyles,
-  Box,
-} from "@material-ui/core"
+import { TextField, Button, Grid, CircularProgress, makeStyles, Box } from "@material-ui/core"
 import { emailPattern } from "../../../utils/validate"
 import { useMutation } from "react-query"
 import { Notification } from "../../../components"
@@ -34,9 +27,7 @@ export const EmailForm: React.FC = () => {
     register,
     reset,
     formState: { errors },
-  } = useForm<EmailFormFields>({
-    defaultValues: { email: "", name: "", topic: "", message: "" },
-  })
+  } = useForm<EmailFormFields>()
   const [showErrorNotification, setErrorNotification] = useState(false)
   const [showSuccessNotification, setSuccessNotification] = useState(false)
 
@@ -59,10 +50,7 @@ export const EmailForm: React.FC = () => {
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit(_onSubmit)}
-        onReset={() => reset({ email: "", name: "", topic: "", message: "" })}
-      >
+      <form onSubmit={handleSubmit(_onSubmit)} onReset={() => reset()}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -127,18 +115,10 @@ export const EmailForm: React.FC = () => {
           </Grid>
           <Grid container item xs={6} justify="flex-end">
             <Box display="flex" alignItems="center" justifyContent="center">
-              <Button
-                size="large"
-                variant="contained"
-                color="secondary"
-                type="submit"
-                disabled={isLoading}
-              >
+              <Button size="large" variant="contained" color="secondary" type="submit" disabled={isLoading}>
                 Send
               </Button>
-              {isLoading && (
-                <CircularProgress size={24} className={styles.buttonProgress} />
-              )}
+              {isLoading && <CircularProgress size={24} className={styles.buttonProgress} />}
             </Box>
           </Grid>
         </Grid>
