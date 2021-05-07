@@ -53,8 +53,8 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({ onDownArrowPress }) 
         layout="fill"
         objectFit="cover"
         objectPosition="center"
-        quality={100}
         className={styles.image}
+        priority
       />
       <Box className={styles.imageOverlay} />
       <Box mt="auto" mx="auto" textAlign="center">
