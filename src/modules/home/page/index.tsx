@@ -58,7 +58,7 @@ export const HomePage: NextPage = () => {
                 title="Education"
                 Icon={School}
                 items={[
-                  "2nd year MSc. student in Aalto University",
+                  "2nd year MSc. student at Aalto University",
                   "Major in Software & Service Engineering",
                   "Minor in Security & Cloud Computing",
                   "Computer Science BSc. 2016-2019",
@@ -67,15 +67,15 @@ export const HomePage: NextPage = () => {
               />
               <AboutMeCard
                 title="Experience"
-                items={["4+ years of mobile & web development", "3+ years as a member of a agile team"]}
+                items={["4+ years of mobile & web development", "3+ years of agile development"]}
                 Icon={Star}
-                fadeTime={3000}
+                fadeTime={2000}
               />
               <AboutMeCard
                 title="Free time"
                 items={["Gym, tennis & other sports", "Programming projects", "🍺"]}
                 Icon={SportsTennis}
-                fadeTime={4500}
+                fadeTime={2500}
               />
             </Box>
           </Box>
